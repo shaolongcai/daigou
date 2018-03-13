@@ -13,6 +13,7 @@
   </view>
   <textarea class='content_text'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</textarea>
   <view class='content_img' wx:for="{{33}}">
+  <!-- 加入 <block>  -->
     <image class='content' src='/images/test_img.png'></image>
   </view>
 </view>
