@@ -2,13 +2,26 @@
   "pages": [
     "pages/purchasing/recommend/recommend",
     "pages/index/index",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/purchasing/follow/follow"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "list":[
+      {
+      "pagePath":"pages/purchasing/recommend/recommend",
+      "text":"推荐"
+    },
+    {
+      "pagePath": "pages/purchasing/follow/follow",
+      "text": "关注"
+    }
+    ]
   }
 }
+
