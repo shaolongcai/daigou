@@ -1,0 +1,20 @@
+
+
+<!--pages/purchasing/recommend/recommend.wxml-->
+
+<!-- 信息卡牌代码 -->
+<view class='info_card'>
+  <!-- 头像 -->
+  <view class='user_info'>
+  <image src='/images/test_img.png' class='user_avatar'></image>
+  
+  <text class='user_name'>用户姓名</text>
+  <button class='follow_btn'>关注</button>
+  </view>
+  <textarea class='content_text'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</textarea>
+  <view class='content_imgs'>
+  <block wx:for="{{3}}">
+    <image class='content_img' src='/images/test_img.png'></image>
+  </block>
+  </view>
+</view>
