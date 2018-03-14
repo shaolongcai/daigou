@@ -3,16 +3,20 @@ page{
   background-color: #F2F2F2
 }
 
+/* 加上弹性布局，方便控制全局 */
 .info_card{
   width: 720rpx;
-  height: 930rpx;
-  background-color: white
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 20rpx auto
 }
 
 .user_info{
   display: flex;
   flex-direction: row;
   padding-left: 40rpx;
+  padding-top: 20rpx;
   align-items:  center;
   justify-content:  space-around
 }
@@ -33,21 +37,28 @@ page{
   width: 180rpx;
   height: 60rpx;
   font-size: 24rpx;
+  background-color: #4AA8FE;
+  color: white
 }
 
 .content_text{
-  margin-left: 20rpx;
+  margin-left: 40rpx;
   margin-top: 20rpx;
   line-height: 60rpx;
+  height: 100%;
+  color: #333
 }
 
-.content_img image{
-  width: 200rpx;
-  height: 200rpx;
+.content_imgs{
+  float: left;
+  padding:20rpx 0;
+  
 }
-
 
 .content_img{
-  float: left;
-  padding: 0 20rpx;
+  width: 200rpx;
+  height: 200rpx;
+  margin-left: 30rpx;
 }
+
+
