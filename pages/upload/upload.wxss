@@ -1,0 +1,67 @@
+/* pages/upload/upload.wxss */
+
+.upload_container{
+  margin-top: 20rpx;
+ 
+  /* display: flex;
+  flex-direction: column; */
+  font-size: 28rpx;
+}
+
+.goods_brief{
+  width: 700rpx;
+  line-height: 50rpx;
+  height:200rpx;
+  margin-left: 20rpx;
+}
+
+.brief_length{
+  color: #ccc;
+  position: absolute;
+  top: 170rpx;
+  left: 650rpx;
+}
+
+.upload{
+  width: 200rpx;
+  height: 200rpx;
+  margin-left: 35rpx;
+  margin-top: 20rpx;
+}
+
+.goods_img{
+  width: 200rpx;
+  height:200rpx;
+  margin-left: 35rpx;
+  margin-top: 20rpx;
+}
+
+.picker{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  padding-left: 25rpx;
+  border-top:2rpx solid #ccc;
+  border-bottom: 2rpx solid #ccc;
+  height: 80rpx;
+  align-items: center
+}
+
+
+.place{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.arrow{
+  position: relative;
+  left: 400rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.picker_text{
+  margin-left: 20rpx;
+}
+
+

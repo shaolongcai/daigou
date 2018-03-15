@@ -1,0 +1,18 @@
+<view class='upload_container'>
+  <textarea class='goods_brief' placeholder="输入产品的简介"></textarea>
+  <text class='brief_length'>70/75</text>
+  <block wx:for="{332}">
+    <image class='goods_img' src='/images/test_img.png'></image>
+  </block>
+  <image class='upload' src='/images/icon/upload.png'></image>
+
+  <picker mode="selector">
+    <view class='picker'>
+      <image class='place' src='/images/icon/place.png'></image>
+      <view class='picker_text'>选择代购地点</view>
+      <!-- 这里要变成块状元素才能居中 -->
+      <image class='arrow' src='/images/icon/arrow-right.png'></image>
+    </view>
+
+  </picker>
+</view>
