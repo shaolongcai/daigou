@@ -1,10 +1,10 @@
 <view class='upload_container'>
-  <textarea class='goods_brief' placeholder="输入产品的简介"></textarea>
-  <text class='brief_length'>70/75</text>
-  <block wx:for="{332}">
-    <image class='goods_img' src='/images/test_img.png'></image>
+  <textarea class='goods_brief' bindinput="bindinput" placeholder="输入产品的简介" maxlength="75"></textarea>
+  <text class='brief_length'>{{text_length}}/75</text>
+  <block wx:for="{{imgUrls}}">
+    <image style='left:{{moveX}}px;top:{{moveY}}px' catchtouchstart="touchS" catchtouchmove='touchM' class='goods_img' src='{{imgUrls[index]}}'></image>
   </block>
-  <image class='upload' src='/images/icon/upload.png'></image>
+  <image class='upload' catchtap='upload' src='/images/icon/upload.png' wx:if="{{imgUrls.length<9}}"></image>
 
   <picker mode="selector">
     <view class='picker'>
@@ -13,6 +13,13 @@
       <!-- 这里要变成块状元素才能居中 -->
       <image class='arrow' src='/images/icon/arrow-right.png'></image>
     </view>
-
   </picker>
+
+  <!-- 删除图片栏 -->
+  <view class='delete'>
+      <image class='delete_img' src='/images/icon/ashcan.png'></image>
+      <!-- <image src='/images/icon/ashcan_open.png'></image> -->
+      <text class='delete_text'>拖动到此处删除</text>
+      <!-- <text>松手即可删除</text> -->
+  </view>
 </view>

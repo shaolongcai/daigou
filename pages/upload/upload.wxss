@@ -2,9 +2,6 @@
 
 .upload_container{
   margin-top: 20rpx;
- 
-  /* display: flex;
-  flex-direction: column; */
   font-size: 28rpx;
 }
 
@@ -34,19 +31,19 @@
   height:200rpx;
   margin-left: 35rpx;
   margin-top: 20rpx;
+  position: relative
 }
 
 .picker{
   display: flex;
   flex-direction: row;
   margin-top: 20rpx;
-  padding-left: 25rpx;
+  padding-left: 35rpx;
   border-top:2rpx solid #ccc;
   border-bottom: 2rpx solid #ccc;
   height: 80rpx;
   align-items: center
 }
-
 
 .place{
   width: 50rpx;
@@ -62,6 +59,29 @@
 
 .picker_text{
   margin-left: 20rpx;
+  color: #999
 }
 
+.delete{
+  display: flex;
+  flex-direction: row;
+  background-color: #fa162b;
+  height: 100rpx;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0
+}
+
+.delete_img{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 240rpx;
+  margin-right: 30rpx;
+}
+
+.delete_text{
+  font-size: 28rpx;
+  color: white;
+}
 
