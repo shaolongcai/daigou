@@ -6,7 +6,10 @@ Page({
    */
   data: {
     text_length:0,
-    imgUrls:[]
+    imgUrls:[],
+    // 移动初始化数据
+    moveX:[],
+    moveY:[]
   },
 
   /**
@@ -41,31 +44,54 @@ Page({
     })
   },
 
+  longpress:function(event){
+    console.log("555555")
+  },
+
   //开始移动图片
-  touchS:function(res){
-    var starX = res.touches[0].clientX
-    var starY = res.touches[0].clientY
-    console.log("X坐标为" + starX + "Y坐标为" + starY)
+  touchS:function(event){
+    console.log(event)
+    var starX = event.touches[0].clientX
+    var starY = event.touches[0].clientY
+    var img_id = event.target.dataset.id
+    console.log(img_id)
     this.setData({
       starX:starX,
-      starY:starY
+      starY:starY,
+      img_id: img_id
     })
   },
 
-  touchM:function(res){
+  //移动图片函数
+  touchM: function (event){
     // 获取初始坐标
     var starX = this.data.starX
     var starY = this.data.starY
     // 获取变化坐标
-    var imgX=res.touches[0].clientX
-    var imgY= res.touches[0].clientY
+    var imgX = event.touches[0].clientX
+    var imgY = event.touches[0].clientY
     // 计算移动坐标
-    var moveX=imgX-starX
-    var moveY=imgY-starY
+    var X=imgX-starX
+    var Y=imgY-starY
     
+    // 获取移动图片的数组下标
+    var img_id = this.data.img_id
+    var moveX = this.data.moveX
+    var moveY = this.data.moveY
+    moveX[img_id]= X
+    moveY[img_id]=Y
+   
     this.setData({
-      moveX: moveX,
-      moveY: moveY
+      moveX:moveX,
+      moveY:moveY
+    })
+  },
+
+  // 结束后回到原位
+  touchend:function(){
+    this.setData({
+      moveX:[],
+      moveY:[]
     })
   }
 
