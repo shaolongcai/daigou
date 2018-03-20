@@ -11,8 +11,9 @@ Page({
     moveX:[],
     moveY:[],
     img_animation:[],
+    zIndex:[],
     delete_model:false,
-    delete_style:"open_del"
+    count:9
   },
 
   /**
@@ -43,13 +44,16 @@ Page({
 
   //上传照片
   upload:function(){
+    var count=this.data.count
     wx.chooseImage({
-      count:9,
+      count:count,
       success: (res=>{
         var img = res.tempFilePaths
+        count = count - img.length
         var imgUrls = this.data.imgUrls.concat(img)
         this.setData({
-          imgUrls
+          imgUrls:imgUrls,
+          count:count
         })
       })
     })
@@ -61,11 +65,14 @@ Page({
     //获取点击图片的数组下标
     var img_id = event.target.dataset.id
     // 长按动画
-    this.animation.rotate(360).scale(1.2, 1.2).step()
+    this.animation.scale(1.2, 1.2).step()
+    this.animation.opacity(0.5).step()
     img_animation[img_id]= this.animation.export()
     this.setData({
       img_animation 
     })
+    // 移动时置顶图片
+    this.data.zIndex[img_id]=300
 
     var starX = event.touches[0].clientX
     var starY = event.touches[0].clientY
@@ -74,7 +81,8 @@ Page({
       starY: starY,
       img_id: img_id,
       ismove:true,
-      delete_model:true
+      delete_model:true,
+      zIndex:this.data.zIndex
     })
   },
 
@@ -121,12 +129,8 @@ Page({
 
   // 结束后回到原位
   touchend:function(){
-    var imgUrls = this.data.imgUrls
     var img_id = this.data.img_id
     var img_animation = this.data.img_animation
-
-
-    //删除图片
     var imgY = this.data.imgY
     var that=this
     this.setData({
@@ -135,7 +139,8 @@ Page({
       delete_model: false,
       //重设不允许直接移动
       ismove: false,
-      delete_style: "cancel_del"
+      delete_style: "cancel_del",
+      zIndex:[]
     })
     // 还原动画
     this.animation.scale(1, 1).step()
@@ -144,26 +149,22 @@ Page({
       img_animation
     })
 
+    //删除图片
     setTimeout(function(){
       if (imgY > 550) {
-        console.log("delete")
-        imgUrls.splice(img_id, 1)
+        var count = that.data.count
+        count = count + 1
+        // 删除图片
+        that.data.imgUrls.splice(img_id, 1)
         that.setData({
-          imgUrls: imgUrls,
+          imgUrls: that.data.imgUrls,
           isdelete:false,
           imgY:0,
+          count:count
         })
       }
     }, 10)
-
-   
-   
   },
-
-  // 删除图片
-  delete_img:function(img_id){
-    
-  }
 
 
 //   //添加数据到lendcloud上
