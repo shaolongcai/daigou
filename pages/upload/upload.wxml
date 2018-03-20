@@ -2,7 +2,7 @@
   <textarea class='goods_brief' bindinput="bindinput" placeholder="输入产品的简介" maxlength="75"></textarea>
   <text class='brief_length'>{{text_length}}/75</text>
   <block wx:for="{{imgUrls}}">
-    <image style='left:{{moveX[index]}}px;top:{{moveY[index]}}px' catchtouchstart="touchS" catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" class='goods_img' src='{{imgUrls[index]}}' data-id='{{index}}'></image>
+    <image style='left:{{moveX[index]}}px;top:{{moveY[index]}}px;' animation="{{img_animation[index]}}"  class='goods_img' src='/images/Birdie.jpg' catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" data-id='{{index}}' />
   </block>
   <image class='upload' catchtap='upload' src='/images/icon/upload.png' wx:if="{{imgUrls.length<9}}"></image>
 
@@ -16,10 +16,10 @@
   </picker>
 
   <!-- 删除图片栏 -->
-  <view class='delete'>
-      <image class='delete_img' src='/images/icon/ashcan.png'></image>
-      <!-- <image src='/images/icon/ashcan_open.png'></image> -->
-      <text class='delete_text'>拖动到此处删除</text>
-      <!-- <text>松手即可删除</text> -->
+  <view class='delete' wx:if="{{delete_model}}">
+    <image class='delete_img' hidden="{{isdelete==true}}" src='/images/icon/ashcan.png'></image>
+    <image class='delete_img' hidden="{{isdelete==false}}" src='/images/icon/ashcan_open.png'></image>  
+    <text class='delete_text' hidden="{{isdelete==true}}">拖动到此处删除</text> 
+    <text class='delete_text' hidden="{{isdelete==false}}">松手即可删除</text> 
   </view>
 </view>

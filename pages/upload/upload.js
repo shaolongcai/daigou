@@ -7,16 +7,27 @@ Page({
   data: {
     text_length:0,
     imgUrls:[],
-    // 移动初始化数据
+    isdelete:false,
     moveX:[],
-    moveY:[]
+    moveY:[],
+    img_animation:[],
+    delete_model:false,
+    delete_style:"open_del"
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+  },
+
+  onShow:function(){
+    // 创建动画实例
+    var animation = wx.createAnimation({
+      duration: 150,
+      timingFunction: 'ease',
+    })
+    this.animation = animation
   },
 
 
@@ -35,6 +46,7 @@ Page({
     wx.chooseImage({
       count:9,
       success: (res=>{
+        console.log(res)
         var img= res.tempFilePaths
         var imgUrls = this.data.imgUrls.concat(img)
         this.setData({
@@ -44,55 +56,114 @@ Page({
     })
   },
 
+  // 长按移动图片
   longpress:function(event){
-    console.log("555555")
-  },
+    var img_animation = this.data.img_animation
+    //获取点击图片的数组下标
+    var img_id = event.target.dataset.id
+    // 长按动画
+    this.animation.rotate(360).scale(1.2, 1.2).step()
+    img_animation[img_id]= this.animation.export()
+    this.setData({
+      img_animation 
+    })
 
-  //开始移动图片
-  touchS:function(event){
-    console.log(event)
     var starX = event.touches[0].clientX
     var starY = event.touches[0].clientY
-    var img_id = event.target.dataset.id
-    console.log(img_id)
     this.setData({
-      starX:starX,
-      starY:starY,
-      img_id: img_id
+      starX: starX,
+      starY: starY,
+      img_id: img_id,
+      ismove:true,
+      delete_model:true
     })
   },
 
   //移动图片函数
   touchM: function (event){
-    // 获取初始坐标
-    var starX = this.data.starX
-    var starY = this.data.starY
-    // 获取变化坐标
-    var imgX = event.touches[0].clientX
-    var imgY = event.touches[0].clientY
-    // 计算移动坐标
-    var X=imgX-starX
-    var Y=imgY-starY
-    
-    // 获取移动图片的数组下标
-    var img_id = this.data.img_id
-    var moveX = this.data.moveX
-    var moveY = this.data.moveY
-    moveX[img_id]= X
-    moveY[img_id]=Y
-   
-    this.setData({
-      moveX:moveX,
-      moveY:moveY
-    })
+    var ismove=this.data.ismove
+    if(ismove==true){
+      // 获取初始坐标
+      var starX = this.data.starX
+      var starY = this.data.starY
+      // 获取变化坐标
+      var imgX = event.touches[0].clientX
+      var imgY = event.touches[0].clientY
+      // 计算移动坐标
+      var X = imgX - starX
+      var Y = imgY - starY
+      console.log("X坐标为" + X, "Y坐标为" + Y)
+
+      // 获取移动图片的数组下标
+      var img_id = this.data.img_id
+      var moveX = this.data.moveX
+      var moveY = this.data.moveY
+      moveX[img_id] = X
+      moveY[img_id] = Y
+
+      this.setData({
+        moveX: moveX,
+        moveY: moveY,
+        Y:Y
+      })
+      // 若Y坐标大于380，则准备删除
+      if(Y>=380){
+        this.setData({
+          isdelete:true
+        })
+      }
+      else{
+        this.setData({
+          isdelete: false
+        })
+      }
+    } 
   },
 
   // 结束后回到原位
   touchend:function(){
+    var imgUrls = this.data.imgUrls
+    var img_id = this.data.img_id
+    var img_animation = this.data.img_animation
+
+
+    //删除图片
+    var Y = this.data.Y
+    var that=this
     this.setData({
       moveX:[],
-      moveY:[]
+      moveY:[],
+      delete_model: false,
+      //重设不允许直接移动
+      ismove: false,
+      delete_style: "cancel_del"
     })
+    // 还原动画
+    this.animation.scale(1, 1).step()
+    img_animation[img_id] = this.animation.export()
+    this.setData({
+      img_animation
+    })
+
+    setTimeout(function(){
+      if (Y > 380) {
+        console.log("delete")
+        imgUrls.splice(img_id, 1)
+        that.setData({
+          imgUrls: imgUrls,
+          isdelete:false,
+          Y:0,
+        })
+      }
+    }, 10)
+
+   
+   
+  },
+
+  // 删除图片
+  delete_img:function(img_id){
+    
   }
 
 
