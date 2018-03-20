@@ -2,7 +2,7 @@
   <textarea class='goods_brief' bindinput="bindinput" placeholder="输入产品的简介" maxlength="75"></textarea>
   <text class='brief_length'>{{text_length}}/75</text>
   <block wx:for="{{imgUrls}}">
-    <image style='left:{{moveX[index]}}px;top:{{moveY[index]}}px;' animation="{{img_animation[index]}}"  class='goods_img' src='{{item.url}}' catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" data-id='{{index}}' />
+    <image style='left:{{moveX[index]}}px;top:{{moveY[index]}}px;' animation="{{img_animation[index]}}"  class='goods_img' src='{{item}}' catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" data-id='{{index}}' />
   </block>
   <image class='upload' catchtap='upload' src='/images/icon/upload.png' wx:if="{{imgUrls.length<9}}"></image>
 

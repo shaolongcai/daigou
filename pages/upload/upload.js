@@ -6,12 +6,7 @@ Page({
    */
   data: {
     text_length:0,
-    imgUrls:[{
-      url:"",
-      moveX:0,
-      moveY:0,
-    }],
-
+    imgUrls:[],
     isdelete:false,
     moveX:[],
     moveY:[],
@@ -48,14 +43,11 @@ Page({
 
   //上传照片
   upload:function(){
-    var imgUrls = this.data.imgUrls
-    var url=""
     wx.chooseImage({
       count:9,
       success: (res=>{
-        for(var i=0;i<res.tempFilePaths.length;i++){
-          imgUrls[i].url = res.tempFilePaths 
-        }
+        var img = res.tempFilePaths
+        var imgUrls = this.data.imgUrls.concat(img)
         this.setData({
           imgUrls
         })
@@ -99,7 +91,7 @@ Page({
       // 计算移动坐标
       var X = imgX - starX
       var Y = imgY - starY
-      console.log("X坐标为" + X, "Y坐标为" + Y)
+      console.log("Y坐标为" + imgY)
 
       // 获取移动图片的数组下标
       var img_id = this.data.img_id
@@ -111,10 +103,10 @@ Page({
       this.setData({
         moveX: moveX,
         moveY: moveY,
-        Y:Y
+        imgY:imgY
       })
       // 若Y坐标大于380，则准备删除
-      if(Y>=380){
+      if (imgY>=550){
         this.setData({
           isdelete:true
         })
@@ -135,7 +127,7 @@ Page({
 
 
     //删除图片
-    var Y = this.data.Y
+    var imgY = this.data.imgY
     var that=this
     this.setData({
       moveX:[],
@@ -153,13 +145,13 @@ Page({
     })
 
     setTimeout(function(){
-      if (Y > 380) {
+      if (imgY > 550) {
         console.log("delete")
         imgUrls.splice(img_id, 1)
         that.setData({
           imgUrls: imgUrls,
           isdelete:false,
-          Y:0,
+          imgY:0,
         })
       }
     }, 10)
