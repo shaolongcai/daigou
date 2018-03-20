@@ -6,7 +6,12 @@ Page({
    */
   data: {
     text_length:0,
-    imgUrls:[],
+    imgUrls:[{
+      url:"",
+      moveX:0,
+      moveY:0,
+    }],
+
     isdelete:false,
     moveX:[],
     moveY:[],
@@ -43,12 +48,14 @@ Page({
 
   //上传照片
   upload:function(){
+    var imgUrls = this.data.imgUrls
+    var url=""
     wx.chooseImage({
       count:9,
       success: (res=>{
-        console.log(res)
-        var img= res.tempFilePaths
-        var imgUrls = this.data.imgUrls.concat(img)
+        for(var i=0;i<res.tempFilePaths.length;i++){
+          imgUrls[i].url = res.tempFilePaths 
+        }
         this.setData({
           imgUrls
         })
