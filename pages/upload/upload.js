@@ -1,4 +1,7 @@
 // pages/upload/upload.js
+const AV = require("../../utils/av-webapp-min.js")
+const post = require("../../model/post-model.js")
+
 Page({
 
   /**
@@ -8,12 +11,15 @@ Page({
     text_length:0,
     imgUrls:[],
     isdelete:false,
+    delete_model: false,
+    // 移动位置
     moveX:[],
     moveY:[],
     img_animation:[],
     zIndex:[],
-    delete_model:false,
-    count:9
+    count:9,
+    place:["香港","日本","澳门","韩国","澳洲","美国","马来西亚"],
+    place_choose:"选择代购地点"
   },
 
   /**
@@ -65,8 +71,7 @@ Page({
     //获取点击图片的数组下标
     var img_id = event.target.dataset.id
     // 长按动画
-    this.animation.scale(1.2, 1.2).step()
-    this.animation.opacity(0.5).step()
+    this.animation.scale(1.2, 1.2).rotate(30).step()
     img_animation[img_id]= this.animation.export()
     this.setData({
       img_animation 
@@ -113,6 +118,7 @@ Page({
         moveY: moveY,
         imgY:imgY
       })
+
       // 若Y坐标大于380，则准备删除
       if (imgY>=550){
         this.setData({
@@ -143,7 +149,7 @@ Page({
       zIndex:[]
     })
     // 还原动画
-    this.animation.scale(1, 1).step()
+    this.animation.scale(1, 1).rotate(0).step()
     img_animation[img_id] = this.animation.export()
     this.setData({
       img_animation
@@ -166,61 +172,76 @@ Page({
     }, 10)
   },
 
+    //选择代购地点
+  place_choose:function(event){
+    var index = event.detail.value
+    var place_choose = this.data.place[index]
+    console.log(place_choose)
+    this.setData({
+      place_choose
+    })
+  },
 
-//   //添加数据到lendcloud上
-//  bindsubmit: function (event) {
-//     var goods_name = event.detail.value.goods_name
-//     var goods_price = event.detail.value.goods_price
-//     var goods_cost = event.detail.value.goods_cost
-//     var goods_brief = event.detail.value.goods_brief
+  // 预览图片
+  previewImage:function(){
+    console.log("1")
+    current: '/images/Amazon.jpg'
+    complete:(res=>console.log(res))
+  },  
 
-//     if (goods_name == "" || goods_price == "" || this.data.imgUrl[0] == "/image/icon/chose_img2.png") {
-//       wx.showToast({
-//         title: "请输入完整信息",
-//         image: "/image/icon/warn.png",
-//         mask: true,
-//         duration: 2000
-//       })
-//     }
-//     else {
-//       wx.showLoading({
-//         title: '正在上传中',
-//         mask: true
-//       })
-//       this.data.imgUrl.map(imgUrl => () => new AV.File('filename', {
-//         blob: {
-//           uri: imgUrl,
-//         },
-//       }).save()).reduce(
-//         (m, p) => m.then(v => AV.Promise.all([...v, p()])),
-//         AV.Promise.resolve([])
-//         //Arr.map()方法为每个数组中的元素都调用一次callback并返回结果。Arr.map(obj,callback),then()一定会最后执行
-//         ).then(
-//         //新增数据表
-//         files =>
-//           new goods({
-//             goods_name: goods_name,
-//             imgUrl: files.map(file => file.url()),
-//             price: goods_price,
-//             cost: goods_cost,
-//             brief: goods_brief
-//           }).save()
-//             //保存完后再跳转，then()只能链式调用
-//             .then(res => {
-//               var choose_id = this.data.choose_id
-//               if (choose_id == "goods") {
-//                 wx.reLaunch({
-//                   url: '/record/record_upload/record_upload',
-//                 })
-//               }
-//               else {
-//                 wx.reLaunch({
-//                   url: '/pages/home',
-//                 })
-//               }
-//             })
-//         )
-//         .catch(console.error);
-//     }
-//   },
+  //发布
+  release: function () {
+    var imgUrls = this.data.imgUrls
+    var place = this.data.place_choose
+    if (imgUrls == "" || place == "选择代购地点") {
+      wx.showToast({
+        title: "请填写完整信息",
+        image: "/images/icon/warn.png",
+        mask: true,
+        duration: 1000
+      })
+    }
+    else {
+      wx.showLoading({
+        title: '正在上传中',
+        mask: true
+      })
+      imgUrls.map(imgUrl => () => new AV.File('filename', {
+        blob: {
+          uri: imgUrl,
+        },
+      }).save()).reduce(
+        (m, p) => m.then(v => AV.Promise.all([...v, p()])),
+        AV.Promise.resolve([])
+        //Arr.map()方法为每个数组中的元素都调用一次callback并返回结果。Arr.map(obj,callback),then()一定会最后执行
+        ).then(
+        //新增数据表
+        files =>
+          new post({
+            place: place,
+            imgUrl: files.map(file => file.url()),
+          }).save()
+            //保存完后再跳转，then()只能链式调用
+            .then(res => {
+              console.log("1")
+              wx.showToast({
+                title: '上传成功',
+                mask: true,
+                duration: 1000
+              })
+            }).then(
+            wx.switchTab({
+              url: '/pages/purchasing/recommend/recommend',
+              success: function (res) { },
+              fail: function (res) { },
+              complete: function (res) {
+                res => console.log(res)
+              },
+            })
+            )
+        )
+        .catch(console.error);
+    }
+  }
+
 })

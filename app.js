@@ -1,4 +1,12 @@
 //app.js
+const AV = require("utils/av-webapp-min.js")
+
+//初始化AV参数
+AV.init({
+  appId: 'FQcMNvzAQzhGrzLddOXhqk9P-gzGzoHsz',
+  appKey: 'ogqVeGxCjnegHYBzS3RvS95E',
+})
+
 App({
   onLaunch: function () {
     // 展示本地存储能力

@@ -60,7 +60,8 @@
 
 .picker_text{
   margin-left: 20rpx;
-  color: #999
+  color: #999;
+  width: 180rpx;
 }
 
 .delete{
@@ -96,3 +97,12 @@ from {height: 0;}
 to {height: 100rpx;}
 }
 
+.release{
+  width: 250rpx;
+  height: 80rpx;
+  margin-top: 100rpx;
+  font-size: 30rpx;
+  letter-spacing: 5rpx;
+  background-color: #4AA8FE;
+  color: white
+}

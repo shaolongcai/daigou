@@ -2,14 +2,14 @@
   <textarea class='goods_brief' bindinput="bindinput" placeholder="输入产品的简介" maxlength="75"></textarea>
   <text class='brief_length'>{{text_length}}/75</text>
   <block wx:for="{{imgUrls}}">
-    <image style='left:{{moveX[index]}}px;top:{{moveY[index]}}px;z-index:{{zIndex[index]}};' animation="{{img_animation[index]}}"  class='goods_img' src='{{item}}' catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" data-id='{{index}}' />
+    <image mode="aspectFit" style='left:{{moveX[index]}}px;top:{{moveY[index]}}px;z-index:{{zIndex[index]}};' animation="{{img_animation[index]}}" class='goods_img' src='/images/Amazon.jpg' catchtouchmove='touchM' catchtouchend="touchend" catchlongpress="longpress" catchtap='previewImage' data-id='{{index}}' />
   </block>
   <image class='upload' catchtap='upload' src='/images/icon/upload.png' wx:if="{{imgUrls.length<9}}"></image>
 
-  <picker mode="selector">
+  <picker mode="selector" range="{{place}}" bindchange="place_choose">
     <view class='picker'>
       <image class='place' src='/images/icon/place.png'></image>
-      <view class='picker_text'>选择代购地点</view>
+      <view class='picker_text'>{{place_choose}}</view>
       <!-- 这里要变成块状元素才能居中 -->
       <image class='arrow' src='/images/icon/arrow-right.png'></image>
     </view>
@@ -22,4 +22,6 @@
     <text class='delete_text' hidden="{{isdelete==true}}">拖动到此处删除</text> 
     <text class='delete_text' hidden="{{isdelete==false}}">松手即可删除</text> 
   </view>
+
+  <button class='release' catchtap='release'>一键发布</button>
 </view>
