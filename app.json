@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/upload/upload",
     "pages/purchasing/recommend/recommend",
+    "pages/upload/upload",
     "pages/index/index",
     "pages/logs/logs",
     "pages/purchasing/follow/follow"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

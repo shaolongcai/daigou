@@ -42,9 +42,10 @@ Page({
   bindinput:function(event){
     //获取textarea的输入内容
     var value = event.detail.value
-    var text_length=value.length
+    console.log(value)
     this.setData({
-      text_length
+      text_length:value.length,
+      value:value
     })
   },
 
@@ -220,6 +221,7 @@ Page({
           new post({
             place: place,
             imgUrl: files.map(file => file.url()),
+            content:this.data.value
           }).save()
             //保存完后再跳转，then()只能链式调用
             .then(res => {

@@ -9,10 +9,10 @@
   <text class='user_name'>用户姓名</text>
   <button class='follow_btn'>关注</button>
   </view>
-  <text class='content_text'>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</text>
+  <text class='content_text'>{{content}}</text>
   <view class='content_imgs'>
-  <block wx:for="{{3}}">
-    <image class='content_img' src='/images/test_img.png'></image>
+  <block wx:for="{{imgUrl}}">
+    <image class='content_img' src='{{item}}'></image>
   </block>
   </view>
 </view>
