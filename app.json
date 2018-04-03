@@ -16,11 +16,15 @@
     "list": [
       {
         "pagePath": "pages/purchasing/recommend/recommend",
-        "text": "推荐"
+        "text": "购买"
       },
       {
         "pagePath": "pages/purchasing/follow/follow",
-        "text": "关注"
+        "text": "聊天"
+      },
+      {
+        "pagePath": "pages/purchasing/follow/follow",
+        "text": "我的"
       }
     ]
   }
