@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/purchasing/recommend/recommend",
     "pages/upload/upload",
+    "pages/purchasing/recommend/recommend",
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/purchasing/follow/follow"

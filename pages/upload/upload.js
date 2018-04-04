@@ -26,6 +26,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const user = AV.User.current()
+    console.log(user)
   },
 
   onShow:function(){
@@ -192,6 +194,11 @@ Page({
 
   //发布
   release: function () {
+    const user = AV.User.current()
+    var user_id=user.id
+    console.log(user_id)
+    // 关联发布者的user_id
+    var user_id = AV.Object.createWithoutData('_User', user_id)
     var imgUrls = this.data.imgUrls
     var place = this.data.place_choose
     if (imgUrls == "" || place == "选择代购地点") {
@@ -221,11 +228,16 @@ Page({
           new post({
             place: place,
             imgUrl: files.map(file => file.url()),
-            content:this.data.value
+            content:this.data.value,
+            owner:user_id
           }).save()
             //保存完后再跳转，then()只能链式调用
             .then(res => {
-              console.log("1")
+              // 关联发布者发布的post_id
+              var post_id = res.id
+              console.log(post_id)
+              user.set("post_list","post_id")
+              user.save().then()
               wx.showToast({
                 title: '上传成功',
                 mask: true,
