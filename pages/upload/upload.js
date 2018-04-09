@@ -196,7 +196,6 @@ Page({
   release: function () {
     const user = AV.User.current()
     var user_id=user.id
-    console.log(user_id)
     // 关联发布者的user_id
     var user_id = AV.Object.createWithoutData('_User', user_id)
     var imgUrls = this.data.imgUrls
@@ -235,8 +234,7 @@ Page({
             .then(res => {
               // 关联发布者发布的post_id
               var post_id = res.id
-              console.log(post_id)
-              user.set("post_list","post_id")
+              user.add("post_list",post_id)
               user.save().then()
               wx.showToast({
                 title: '上传成功',
