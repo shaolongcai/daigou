@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    follow:false
+    follow:true
   },
 
   /**
@@ -33,15 +33,19 @@ Page({
     console.log(user)
     user.add("follow", owner)
     user.save().then()
-    
-    // 加入为粉丝
-    const user_id = user.id
-    var query = new AV.Query('_User');
-    query.get(owner).then(owner=>{
-      console.log(owner)
-      owner.add("fans",user_id)
-      owner.save().then()
+
+    this.setData({
+      follow:true
     })
+    
+    // 加入为粉丝 206报错 不能改变其他用户的状态，需要通过后台来操作
+    // const user_id = user.id
+    // var query = new AV.Query('_User');
+    // query.get(owner).then(owner=>{
+    //   console.log(owner)
+    //   owner.add("fans",user_id)
+    //   owner.save().then()
+    // })
   }
 
   
