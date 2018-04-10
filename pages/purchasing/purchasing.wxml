@@ -1,0 +1,21 @@
+<!-- 引用信息卡牌模板 -->
+<import src="/template/info-card-tem.wxml" />
+
+<view class='top_bar'>
+  <text catchtap='recommend' style='color:{{recommend_color}}'>推荐</text>
+  <text catchtap='attention' style='color:{{attention_color}}'>关注</text>
+</view>
+
+<!-- 推荐面板 -->
+<view hidden="{{!purchasing}}">
+<block wx:for="{{postData}}" wx:for-index="idx">
+<template is="info-card-tem" data="{{...item}}" />
+</block>
+</view>
+
+<!-- 关注面板 -->
+<view hidden="{{purchasing}}">
+  <!-- <block wx:for="{{postData}}" wx:for-index="idx">
+  <template is="info-card-tem" data="{{...item}}" />
+  </block> -->
+</view>

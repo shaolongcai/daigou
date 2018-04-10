@@ -1,5 +1,5 @@
 // pages/purchasing/recommend/recommend.js
-const AV = require("../../../utils/av-webapp-min")
+const AV = require("../../utils/av-webapp-min")
 
 Page({
 
@@ -7,7 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    follow:true
+    follow:true,
+    purchasing:true,
+    attention_color:"#333",
+    recommend_color:"#4aa8fe"
   },
 
   /**
@@ -73,5 +76,21 @@ Page({
     // })
   },
 
+  // 切换到推荐面板
+  recommend:function(){
+    this.setData({
+      purchasing: true,
+      attention_color: "#333",
+      recommend_color: "#4aa8fe"
+    })
+    
+  },
   
+  attention:function(){
+    this.setData({
+      purchasing:false,
+      attention_color:"#4aa8fe",
+      recommend_color:"#333"
+    })
+  }
 })

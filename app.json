@@ -1,11 +1,9 @@
 {
   "pages": [
-    
-    "pages/purchasing/recommend/recommend",
+    "pages/purchasing/purchasing",
     "pages/upload/upload",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/purchasing/follow/follow"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,15 +14,15 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/purchasing/recommend/recommend",
+        "pagePath": "pages/purchasing/purchasing",
         "text": "购买"
       },
       {
-        "pagePath": "pages/purchasing/follow/follow",
+        "pagePath": "pages/purchasing/purchasing",
         "text": "聊天"
       },
       {
-        "pagePath": "pages/purchasing/follow/follow",
+        "pagePath": "pages/purchasing/purchasing",
         "text": "我的"
       }
     ]
