@@ -7,6 +7,6 @@
 </view>
 
 
-<block wx:for="{{postData}}">
+<block wx:for="{{postData}}" wx:for-index="idx">
 <template is="info-card-tem" data="{{...item}}" />
 </block>
