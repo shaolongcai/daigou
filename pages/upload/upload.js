@@ -243,7 +243,7 @@ Page({
               })
             }).then(
             wx.switchTab({
-              url: '/pages/purchasing/recommend/recommend',
+              url: '/pages/purchasing/purchasing',
               success: function (res) { },
               fail: function (res) { },
               complete: function (res) {

@@ -6,5 +6,21 @@
   background-color: white;
   border-bottom: 2rpx solid #ccc;
   font-size: 32rpx;
-  justify-content:  space-around
+  position: fixed;
+  top:-20rpx;
+  width: 100%;
+  text-align: center;
+  z-index: 3
+}
+
+.top_bar text{
+  width: 50%
+}
+
+.recommend{
+  margin-top: 80rpx;
+}
+
+.attention{
+  margin-top: 80rpx
 }

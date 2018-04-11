@@ -10,7 +10,8 @@ Page({
     follow:true,
     purchasing:true,
     attention_color:"#333",
-    recommend_color:"#4aa8fe"
+    recommend_color:"#4aa8fe",
+    postData_follow:[]
   },
 
   /**
@@ -32,7 +33,6 @@ Page({
         var follow = user.attributes.follow
         var owner = postData[i].attributes.owner.id
         var value=follow.indexOf(owner)
-        console.log(value)
         if(value!=-1){
           postData[i].attributes.follow = true
         }
@@ -86,11 +86,38 @@ Page({
     
   },
   
+  //切换到关注面板
   attention:function(){
     this.setData({
       purchasing:false,
       attention_color:"#4aa8fe",
       recommend_color:"#333"
     })
+    var postData_follow = this.data.postData_follow
+    const user = AV.User.current()
+    // 获取关注列表
+    var follow = user.attributes.follow
+    var query = new AV.Query('_User');
+    var query_post = new AV.Query("post")
+    for(var index in follow){
+      var follow_id = follow[index]
+      console.log(follow_id)
+      // 此处查询是异步，先发送查询请求，同时获取follow_id 所以会先console出所有follow_id
+      query.get(follow_id).then(
+        res=>{
+          // 获取关注人所发的帖子
+          var post_list = res.attributes.post_list
+          for(var i in post_list){
+            var post_id=post_list[i]
+            query_post.get(post_id).then(post=>{
+              postData_follow.push(post)
+              console.log(postData_follow)
+              this.setData({ postData_follow })
+            })
+            
+          }
+        }
+      )
+    }
   }
 })
