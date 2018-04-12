@@ -16,7 +16,7 @@
 
 <!-- 关注面板 -->
 <view class='attention' hidden="{{purchasing}}">
-  <!-- <block wx:for="{{postData}}" wx:for-index="idx">
+   <block wx:for="{{postData_follow}}" >
   <template is="info-card-tem" data="{{...item}}" />
-  </block> -->
+  </block> 
 </view>

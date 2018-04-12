@@ -18,7 +18,7 @@ page{
   padding-left: 40rpx;
   padding-top: 20rpx;
   align-items:  center;
-  justify-content:  space-around
+
 }
 
 .user_avatar{
@@ -28,12 +28,13 @@ page{
 }
 
 .user_name{
-  font-size: 32rpx;
+  font-size: 28rpx;
   margin-left: 30rpx;
+  width: 280rpx;
 }
 
 .follow_btn{
-  margin-right: 40rpx;
+  margin-left: 50rpx;
   width: 180rpx;
   height: 60rpx;
   font-size: 24rpx;
@@ -46,7 +47,8 @@ page{
   margin-top: 20rpx;
   line-height: 60rpx;
   height: 100%;
-  color: #333
+  color: #333;
+  font-size: 28rpx;
 }
 
 .content_imgs{

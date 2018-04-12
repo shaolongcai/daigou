@@ -195,6 +195,8 @@ Page({
   //发布
   release: function () {
     const user = AV.User.current()
+    var avatarUrl = user.attributes.avatarUrl
+    var nickName=user.attributes.nickName
     var user_id=user.id
     // 关联发布者的user_id
     var user_id = AV.Object.createWithoutData('_User', user_id)
@@ -228,7 +230,9 @@ Page({
             place: place,
             imgUrl: files.map(file => file.url()),
             content:this.data.value,
-            owner:user_id
+            owner:user_id,
+            avatarUrl:avatarUrl,
+            nickName:nickName
           }).save()
             //保存完后再跳转，then()只能链式调用
             .then(res => {

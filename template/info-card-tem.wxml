@@ -1,20 +1,21 @@
-
 <!-- 信息卡牌代码 -->
 <template name="info-card-tem">
-<view class='info_card'>
-  <!-- 头像 -->
-  <view class='user_info'>
-  <image src='/images/test_img.png' class='user_avatar'></image>
-  
-  <text class='user_name'>用户姓名</text>
-  <button wx:if="{{!follow}}" class='follow_btn' catchtap='follow' data-owner='{{owner.objectId}}' >关注</button>
-   <button wx:if="{{follow}}" disabled='true' class='follow_btn' bindtap='follow' >已关注</button>
+  <view class='info_card'>
+    <!-- 头像 -->
+    <view class='user_info'>
+      <image src='{{avatarUrl}}' class='user_avatar'></image>
+
+      <text class='user_name'>{{nickName}}</text>
+      <view wx:if="{{!isHidden}}">
+        <button wx:if="{{!follow}}" class='follow_btn' catchtap='follow' data-owner='{{owner.objectId}}'>关注</button>
+        <button wx:if="{{follow}}" disabled='true' class='follow_btn' bindtap='follow'>已关注</button>
+      </view>
+    </view>
+    <text class='content_text'>{{content}}</text>
+    <view class='content_imgs'>
+      <block wx:for="{{imgUrl}}">
+        <image class='content_img' src='{{item}}'></image>
+      </block>
+    </view>
   </view>
-  <text class='content_text'>{{content}}</text>
-  <view class='content_imgs'>
-  <block wx:for="{{imgUrl}}">
-    <image class='content_img' src='{{item}}'></image>
-  </block>
-  </view>
-</view>
 </template>
